@@ -8,13 +8,13 @@
 [![GitHub issues](https://img.shields.io/github/issues/Aswintechie/ttperf)](https://github.com/Aswintechie/ttperf/issues)
 [![GitHub stars](https://img.shields.io/github/stars/Aswintechie/ttperf)](https://github.com/Aswintechie/ttperf/stargazers)
 
-**A streamlined CLI tool for profiling TT-Metal tests and extracting device kernel performance metrics**
+**A streamlined CLI tool for profiling Tenstorrent's TT-Metal tests and extracting device kernel performance metrics**
 
 </div>
 
 ## ✨ Features
 
-- 🔍 **Automated Profiling**: Seamlessly runs TT-Metal profiler with pytest
+- 🔍 **Automated Profiling**: Seamlessly runs Tenstorrent's TT-Metal profiler with pytest
 - 📊 **CSV Analysis**: Automatically extracts and parses performance CSV files
 - ⚡ **Real-time Output**: Shows profiling progress in real-time
 - 📈 **Performance Metrics**: Calculates total DEVICE KERNEL DURATION
@@ -77,7 +77,7 @@ ttperf tests/ops/test_matmul.py::test_basic_matmul
 ## 🛠️ How It Works
 
 1. **Command Parsing**: Analyzes input arguments to determine profile name and test path
-2. **Profile Execution**: Runs the TT-Metal profiler with the specified test
+2. **Profile Execution**: Runs the Tenstorrent's TT-Metal profiler with the specified test
 3. **Output Monitoring**: Streams profiling output in real-time
 4. **CSV Extraction**: Parses the output to find the generated CSV file path
 5. **Performance Analysis**: Reads the CSV and calculates total device kernel duration
@@ -94,7 +94,7 @@ The tool extracts the following key metrics:
 
 - Python 3.7+
 - pandas
-- TT-Metal development environment
+- Tenstorrent's TT-Metal development environment
 - pytest
 
 ## 📁 Project Structure
@@ -132,11 +132,11 @@ If you encounter any issues, please [create an issue](https://github.com/Aswinte
 
 ## 🌟 Acknowledgments
 
-- TT-Metal development team for the profiling tools
+- Tenstorrent's TT-Metal development team for the profiling tools
 - Python community for excellent libraries like pandas
 
 ---
 
 <div align="center">
-Made with ❤️ for the TT-Metal community
+Made with ❤️ for the Tenstorrent TT-Metal community
 </div> 
