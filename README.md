@@ -121,6 +121,10 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+## ⚠️ Disclaimer
+
+This tool is an independent utility that interfaces with Tenstorrent's TT-Metal profiling tools. It is not affiliated with or endorsed by Tenstorrent Inc. The tool serves as a convenience wrapper around existing TT-Metal profiling infrastructure.
+
 ## 🐛 Issues
 
 If you encounter any issues, please [create an issue](https://github.com/Aswintechie/ttperf/issues) on GitHub.
