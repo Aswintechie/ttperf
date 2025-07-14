@@ -26,6 +26,13 @@
 ### Installation
 
 ```bash
+# Install from PyPI (recommended)
+pip install ttperf
+```
+
+**Or install from source:**
+
+```bash
 # Clone the repository
 git clone https://github.com/Aswintechie/ttperf.git
 cd ttperf
@@ -133,6 +140,7 @@ If you encounter any issues, please [create an issue](https://github.com/Aswinte
 
 **Aswin Z**
 - GitHub: [@Aswintechie](https://github.com/Aswintechie)
+- Portfolio: [aswinlocal.in](https://aswinlocal.in)
 
 ## 🌟 Acknowledgments
 
