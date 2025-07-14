@@ -34,6 +34,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Planned
 - Enhanced error messages
 
+## [0.1.3] - 2025-07-14
+
+### Added
+- Auto-generation of profile names from test paths when no name is specified
+- Profile name is derived from test method name (for `::test_name`) or file name (for `.py` files)
+- Visual feedback showing auto-generated profile names
+
+### Changed
+- Updated help examples to show auto-generated profile names
+
 ## [0.1.2] - 2025-07-14
 
 ### Added

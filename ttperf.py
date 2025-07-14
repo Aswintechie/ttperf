@@ -29,9 +29,9 @@ def print_help():
 Usage: ttperf [OPTIONS] [PROFILE_NAME] [pytest] <test_path>
 
 Examples:
-  ttperf test_performance.py                    # Run profiling on test
-  ttperf my_profile pytest test_performance.py # Run with custom profile name
-  ttperf tests/test_ops.py::test_matmul        # Run specific test method
+  ttperf test_performance.py                    # Auto-generated profile: test_performance
+  ttperf my_profile pytest test_performance.py # Custom profile name: my_profile
+  ttperf tests/test_ops.py::test_matmul        # Auto-generated profile: test_matmul
 
 Options:
   --version, -v    Show version information
@@ -44,10 +44,25 @@ Arguments:
 For more information, visit: https://github.com/Aswintechie/ttperf""")
 
 
+def generate_profile_name(test_cmd: str) -> str:
+    """Generate a profile name from the test command/path."""
+    # Handle specific test method (e.g., test_ops.py::test_matmul -> test_matmul)
+    if "::" in test_cmd:
+        return test_cmd.split("::")[-1]
+    
+    # Handle file path (e.g., tests/test_conv.py -> test_conv)
+    if test_cmd.endswith(".py"):
+        filename = Path(test_cmd).stem  # Gets filename without extension
+        return filename
+    
+    # Handle directory or other cases
+    return Path(test_cmd).name or "profile"
+
+
 def parse_args(argv):
     # Handle version and help flags
     if "--version" in argv or "-v" in argv:
-        print("ttperf version 0.1.2")
+        print("ttperf version 0.1.3")
         sys.exit(0)
     
     if "--help" in argv or "-h" in argv:
@@ -70,6 +85,11 @@ def parse_args(argv):
         print("❌ Test file/path not found in arguments.")
         print_help()
         sys.exit(1)
+
+    # Auto-generate profile name if not provided
+    if not name:
+        name = generate_profile_name(test_cmd)
+        print(f"🏷️ Auto-generated profile name: {name}")
 
     return name, test_cmd
 

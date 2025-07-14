@@ -1,6 +1,6 @@
 [project]
 name = "ttperf"
-version = "0.1.2"
+version = "0.1.3"
 description = "A streamlined CLI tool for profiling Tenstorrent's TT-Metal tests and extracting device kernel performance metrics"
 authors = [{name = "Aswin Z", email = "aswintechie@gmail.com"}]
 license = {text = "MIT"}
