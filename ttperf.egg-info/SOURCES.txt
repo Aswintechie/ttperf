@@ -1,8 +1,0 @@
-pyproject.toml
-ttperf.py
-ttperf.egg-info/PKG-INFO
-ttperf.egg-info/SOURCES.txt
-ttperf.egg-info/dependency_links.txt
-ttperf.egg-info/entry_points.txt
-ttperf.egg-info/requires.txt
-ttperf.egg-info/top_level.txt

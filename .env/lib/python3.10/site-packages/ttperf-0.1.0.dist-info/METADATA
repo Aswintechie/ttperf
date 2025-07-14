@@ -1,6 +1,0 @@
-Metadata-Version: 2.4
-Name: ttperf
-Version: 0.1.0
-Summary: Run tt-metal profiler and extract DEVICE_KERNEL_DURATION
-Author-email: Aswin Z <you@example.com>
-Requires-Dist: pandas
