@@ -1,0 +1,13 @@
+[project]
+name = "ttperf"
+version = "0.1.0"
+description = "Run tt-metal profiler and extract DEVICE_KERNEL_DURATION"
+authors = [{name = "Aswin Z", email = "you@example.com"}]
+dependencies = ["pandas"]
+
+[project.scripts]
+ttperf = "ttperf:main"
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
