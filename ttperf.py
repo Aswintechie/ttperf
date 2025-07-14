@@ -23,7 +23,37 @@ def get_device_kernel_duration(csv_path: str) -> float:
     return df["DEVICE KERNEL DURATION [ns]"].sum()
 
 
+def print_help():
+    print("""🚀 ttperf - TT-Metal Performance Profiler
+
+Usage: ttperf [OPTIONS] [PROFILE_NAME] [pytest] <test_path>
+
+Examples:
+  ttperf test_performance.py                    # Run profiling on test
+  ttperf my_profile pytest test_performance.py # Run with custom profile name
+  ttperf tests/test_ops.py::test_matmul        # Run specific test method
+
+Options:
+  --version, -v    Show version information
+  --help, -h       Show this help message
+
+Arguments:
+  PROFILE_NAME     Optional name for the profiling session
+  test_path        Path to test file or specific test method
+
+For more information, visit: https://github.com/Aswintechie/ttperf""")
+
+
 def parse_args(argv):
+    # Handle version and help flags
+    if "--version" in argv or "-v" in argv:
+        print("ttperf version 0.1.2")
+        sys.exit(0)
+    
+    if "--help" in argv or "-h" in argv:
+        print_help()
+        sys.exit(0)
+    
     # Default values
     name = None
     test_cmd = None
@@ -38,6 +68,7 @@ def parse_args(argv):
 
     if not test_cmd:
         print("❌ Test file/path not found in arguments.")
+        print_help()
         sys.exit(1)
 
     return name, test_cmd
@@ -50,7 +81,7 @@ def build_profile_command(name, test_cmd):
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: ttperf [name] [pytest] <test_path>")
+        print_help()
         sys.exit(1)
 
     name, test_cmd = parse_args(sys.argv[1:])
