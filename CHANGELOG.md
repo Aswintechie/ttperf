@@ -33,6 +33,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Planned
 - Enhanced error messages
+
+## [0.1.1] - 2024-12-19
+
+### Changed
+- Updated minimum Python version requirement from 3.7 to 3.8 for Ubuntu 24.04 compatibility
+- Removed Python 3.7 from GitHub Actions test matrix
+- Updated documentation to reflect Python 3.8+ requirement
+
+### Fixed
+- Resolved GitHub Actions failures on Ubuntu 24.04 due to Python 3.7 unavailability
 - Support for multiple output formats
 - Performance comparison tools
 - Configuration file support
