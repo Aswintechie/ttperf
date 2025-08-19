@@ -5,7 +5,7 @@ description = "A Python CLI wrapper for profiling Tenstorrent's TT-Metal tests"
 authors = [
     {name = "Aswin", email = "aswin@aswincloud.com"}
 ]
-license = "MIT"
+license = {file = "LICENSE"}
 readme = "README.md"
 requires-python = ">=3.8"
 dependencies = [
