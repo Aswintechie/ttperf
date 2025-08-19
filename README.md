@@ -4,7 +4,7 @@
 
 ![Python](https://img.shields.io/badge/python-3.8+-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
-![Version](https://img.shields.io/badge/version-0.1.3-orange.svg)
+![Version](https://img.shields.io/badge/version-0.1.4-orange.svg)
 [![GitHub issues](https://img.shields.io/github/issues/Aswintechie/ttperf)](https://github.com/Aswintechie/ttperf/issues)
 [![GitHub stars](https://img.shields.io/github/stars/Aswintechie/ttperf)](https://github.com/Aswintechie/ttperf/stargazers)
 
@@ -20,6 +20,8 @@
 - 📈 **Performance Metrics**: Calculates total DEVICE KERNEL DURATION
 - 🎯 **Simple CLI**: Easy-to-use command-line interface
 - 🛠️ **Flexible**: Supports named profiles and various test paths
+- 🚀 **Operation-based Profiling**: Profile specific operations by name (e.g., `ttperf add`)
+- ⚙️ **Dynamic Configuration**: Customize tensor shape, dtype, and layout for operations
 
 ## 🚀 Quick Start
 
@@ -52,11 +54,24 @@ ttperf my_profile pytest test_performance.py
 
 # Run on a specific test method
 ttperf tests/test_ops.py::test_matmul
+
+# Profile specific operations by name
+ttperf add
+ttperf relu
+ttperf matmul
+
+# Profile operations with custom profile names
+ttperf my_add_profile add
+ttperf my_relu_profile relu
+
+# Profile operations with custom configuration
+ttperf add --shape 1,1,32,32 --dtype bfloat16 --layout tile
+ttperf relu --shape 1,1,64,64 --dtype float32 --layout row_major
 ```
 
 ## 📋 Usage Examples
 
-### Simple Test Profiling
+### Test File Profiling
 ```bash
 ttperf test_conv.py
 ```
@@ -71,9 +86,79 @@ ttperf conv_benchmark pytest test_conv.py
 ttperf tests/ops/test_matmul.py::test_basic_matmul
 ```
 
+### Operation-based Profiling
+```bash
+# Basic operations
+ttperf add
+ttperf subtract
+ttperf multiply
+ttperf divide
+
+# Activation functions
+ttperf relu
+ttperf sigmoid
+ttperf tanh
+ttperf gelu
+
+# Mathematical operations
+ttperf sqrt
+ttperf exp
+ttperf log
+ttperf sin
+ttperf cos
+
+# Comparison operations
+ttperf gt
+ttperf lt
+ttperf eq
+ttperf ne
+
+# Reduction operations
+ttperf max
+ttperf min
+ttperf mean
+ttperf sum
+
+# Backward operations
+ttperf add_bw
+ttperf relu_bw
+ttperf sigmoid_bw
+```
+
+### Dynamic Configuration
+```bash
+# Custom tensor shape
+ttperf add --shape 1,1,32,32
+ttperf relu --shape 2,3,64,128
+
+# Custom data type
+ttperf add --dtype float32
+ttperf multiply --dtype int32
+
+# Custom memory layout
+ttperf add --layout row_major
+ttperf relu --layout tile
+
+# Combined configuration
+ttperf add --shape 1,1,64,64 --dtype float32 --layout row_major
+ttperf gelu --shape 2,1,32,32 --dtype bfloat16 --layout tile
+```
+
+### List All Supported Operations
+```bash
+ttperf --list-ops
+# or
+ttperf -l
+```
+
 ### Output Example
 ```
-▶️ Running: ./tt_metal/tools/profiler/profile_this.py -n conv_benchmark -c "pytest test_conv.py"
+🔧 Using custom configuration:
+   Shape: (1, 1, 32, 32)
+   Dtype: bfloat16
+   Layout: tile
+🏷️ Auto-generated profile name: temp_test_add
+▶️ Running: ./tt_metal/tools/profiler/profile_this.py -n temp_test_add -c "pytest temp_test_add.py"
 
 ... (profiling output) ...
 
@@ -83,11 +168,13 @@ ttperf tests/ops/test_matmul.py::test_basic_matmul
 
 ## 🛠️ How It Works
 
-1. **Command Parsing**: Analyzes input arguments to determine profile name and test path
-2. **Profile Execution**: Runs the Tenstorrent's TT-Metal profiler with the specified test
-3. **Output Monitoring**: Streams profiling output in real-time
-4. **CSV Extraction**: Parses the output to find the generated CSV file path
-5. **Performance Analysis**: Reads the CSV and calculates total device kernel duration
+1. **Command Parsing**: Analyzes input arguments to determine profile name and test path/operation
+2. **Operation Detection**: If an operation name is provided, maps it to the corresponding test method
+3. **Dynamic Configuration**: If custom configuration is provided, generates a temporary test file with the specified parameters
+4. **Profile Execution**: Runs the Tenstorrent's TT-Metal profiler with the specified test
+5. **Output Monitoring**: Streams profiling output in real-time
+6. **CSV Extraction**: Parses the output to find the generated CSV file path
+7. **Performance Analysis**: Reads the CSV and calculates total device kernel duration
 
 ## 📊 Performance Metrics
 
@@ -96,6 +183,23 @@ The tool extracts the following key metrics:
 - **DEVICE KERNEL DURATION [ns]**: Total time spent in device kernels
 - **CSV Path**: Location of the detailed profiling results
 - **Real-time Progress**: Live output during profiling
+
+## ⚙️ Configuration Options
+
+### Shape Configuration
+- **Format**: Comma-separated integers (e.g., `1,1,32,32`)
+- **Default**: `(1, 1, 1024, 1024)`
+- **Example**: `--shape 2,3,64,128`
+
+### Data Type Configuration
+- **Valid Options**: `bfloat16`, `float32`, `int32`
+- **Default**: `bfloat16`
+- **Example**: `--dtype float32`
+
+### Layout Configuration
+- **Valid Options**: `tile`, `row_major`
+- **Default**: `tile`
+- **Example**: `--layout row_major`
 
 ## 🔧 Requirements
 

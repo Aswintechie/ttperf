@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.4] - 2025-01-14
+
+### Changed
+- **Major Improvement**: Configuration extraction now reads from CSV profiler output instead of parsing text with regex
+- Replaced 50+ complex regex patterns with structured CSV data parsing
+- Enhanced `extract_test_config_and_status()` function to prioritize CSV data over text parsing
+- Added new `extract_config_from_csv()` function for reliable configuration extraction
+
+### Fixed
+- More accurate shape, dtype, and layout detection from profiler results
+- Improved reliability of configuration reporting in test summaries
+- Better handling of tensor dimension parsing (e.g., "32[32]" format)
+
+### Technical
+- CSV-based extraction provides structured, consistent data vs. unreliable text parsing
+- Maintains backward compatibility with text parsing as fallback
+- Cleaner, more maintainable codebase with reduced complexity
+
 ## [0.1.0] - 2025-07-14
 
 ### Added

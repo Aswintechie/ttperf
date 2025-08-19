@@ -1,0 +1,1134 @@
+{
+  "defaults": {
+    "shape": [1, 1, 1024, 1024],
+    "dtype": "bfloat16",
+    "layout": "tile",
+    "values": "random",
+    "min_val": null,
+    "max_val": null
+  },
+  "operations": {
+    "bitwise_left_shift": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "int32",
+      "layout": "tile",
+      "values": "random",
+      "min_val": 0,
+      "max_val": 31
+    },
+    "bitwise_right_shift": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "int32",
+      "layout": "tile",
+      "values": "random",
+      "min_val": 0,
+      "max_val": 31
+    },
+    "abs": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "acos": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "mixed"
+    },
+    "asin": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "mixed"
+    },
+    "asinh": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "atan": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "atanh": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "cos": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "acosh": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "positive"
+    },
+    "erfinv": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "exp2": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "mixed"
+    },
+    "expm1": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "mixed"
+    },
+    "gez": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "gtz": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "i0": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "mixed"
+    },
+    "isfinite": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "isinf": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "isnan": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "lez": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "log": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "positive"
+    },
+    "log10": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "positive"
+    },
+    "log2": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "positive"
+    },
+    "log1p": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "mixed"
+    },
+    "logical_not": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "ltz": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "neg": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "reciprocal": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "positive"
+    },
+    "relu": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "relu6": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "sign": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "signbit": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "silu": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "sin": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "sqrt": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "positive"
+    },
+    "square": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "tan": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "mixed"
+    },
+    "exp": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "erf": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "erfc": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "gelu": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "rsqrt": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "positive"
+    },
+    "sigmoid": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "tanh": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "i1": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "isneginf": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "isposinf": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "nez": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "bitwise_not": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "int32",
+      "layout": "tile",
+      "values": "random"
+    },
+    "floor": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "ceil": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "trunc": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "eqz": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "mish": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "cosh": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "mixed"
+    },
+    "sinh": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "mixed"
+    },
+    "cbrt": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "softplus": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "log_sigmoid": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "mixed"
+    },
+    "swish": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "hardswish": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "hardsigmoid": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "hardtanh": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "celu": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "selu": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "tanhshrink": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "deg2rad": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "rad2deg": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "identity": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "softsign": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "frac": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "round": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "logit": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "clip": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "clamp": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "sigmoid_accurate": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "elu": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "leaky_relu": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "threshold": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "tril": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "triu": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "digamma": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "range",
+      "min_val": 1,
+      "max_val": 100
+    },
+    "lgamma": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "positive"
+    },
+    "multigammaln": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "range",
+      "min_val": 1,
+      "max_val": 100
+    },
+    "polygamma": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "heaviside": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "logical_not_": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "fill": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "glu": {
+      "shape": [1, 1, 32, 64],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "reglu": {
+      "shape": [1, 1, 32, 64],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "geglu": {
+      "shape": [1, 1, 32, 64],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "swiglu": {
+      "shape": [1, 1, 32, 64],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "relu_max": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "relu_min": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "prelu": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "softshrink": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "hardshrink": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "var_hw": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "std_hw": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "add": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "subtract": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "multiply": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "divide": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "gt": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "lt": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "eq": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "ne": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "ge": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "le": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "logical_and": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "logical_or": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "logical_xor": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "atan2": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "hypot": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "logaddexp": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "logaddexp2": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "mixed"
+    },
+    "maximum": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "minimum": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "pow": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "mixed"
+    },
+    "fmod": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "mixed"
+    },
+    "remainder": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "squared_difference": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "bitwise_and": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "int32",
+      "layout": "tile",
+      "values": "random"
+    },
+    "bitwise_or": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "int32",
+      "layout": "tile",
+      "values": "random"
+    },
+    "bitwise_xor": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "int32",
+      "layout": "tile",
+      "values": "random"
+    },
+    "mul": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "sub": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "rpow": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "positive"
+    },
+    "rdiv": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "positive"
+    },
+    "ldexp": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "mixed"
+    },
+    "xlogy": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "nextafter": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "bias_gelu": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "addalpha": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "subalpha": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "isclose": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "add_": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "subtract_": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "multiply_": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "divide_": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "mul_": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "sub_": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "div_": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "rsub_": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "gt_": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "lt_": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "eq_": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "ne_": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "ge_": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "le_": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "logical_and_": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "logical_or_": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "logical_xor_": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "ldexp_": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "mixed"
+    },
+    "logaddexp_": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "logaddexp2_": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "bias_gelu_": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "squared_difference_": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "assign": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "round_binary": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "clip_binary": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "where": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "mac": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "addcdiv": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "addcmul": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "lerp": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "max": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "min": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "mean": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "sum": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "prod": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "var": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "std": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "cumsum": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "cumprod": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "complex_tensor": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "real": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "imag": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "angle": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "conj": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "polar": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "complex_recip": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "bfloat16",
+      "layout": "tile",
+      "values": "random"
+    },
+    "i0_bw": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "float32",
+      "layout": "tile",
+      "values": "mixed"
+    },
+    "bitwise_left_shift": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "int32",
+      "layout": "tile",
+      "values": "random",
+      "min_val": 0,
+      "max_val": 31
+    },
+    "bitwise_right_shift": {
+      "shape": [1, 1, 1024, 1024],
+      "dtype": "int32",
+      "layout": "tile",
+      "values": "random",
+      "min_val": 0,
+      "max_val": 31
+    }
+  }
+} 
