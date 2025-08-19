@@ -4,7 +4,7 @@
 
 ![Python](https://img.shields.io/badge/python-3.8+-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
-![Version](https://img.shields.io/badge/version-0.1.4-orange.svg)
+![Version](https://img.shields.io/badge/version-0.1.5-orange.svg)
 [![GitHub issues](https://img.shields.io/github/issues/Aswintechie/ttperf)](https://github.com/Aswintechie/ttperf/issues)
 [![GitHub stars](https://img.shields.io/github/stars/Aswintechie/ttperf)](https://github.com/Aswintechie/ttperf/stargazers)
 
@@ -67,6 +67,11 @@ ttperf my_relu_profile relu
 # Profile operations with custom configuration
 ttperf add --shape 1,1,32,32 --dtype bfloat16 --layout tile
 ttperf relu --shape 1,1,64,64 --dtype float32 --layout row_major
+
+# Profile operations with memory configuration
+ttperf add --dram                                # Use DRAM memory (default)
+ttperf relu --l1                                 # Use L1 memory
+ttperf add --shape 1,1,64,64 --l1                # Combined options
 ```
 
 ## 📋 Usage Examples
@@ -142,6 +147,12 @@ ttperf relu --layout tile
 # Combined configuration
 ttperf add --shape 1,1,64,64 --dtype float32 --layout row_major
 ttperf gelu --shape 2,1,32,32 --dtype bfloat16 --layout tile
+
+# Memory configuration options
+ttperf add --memory-config dram                  # Explicit DRAM
+ttperf relu --memory-config l1                   # Explicit L1  
+ttperf add --dram --shape 1,1,128,128            # DRAM with custom shape
+ttperf relu --l1 --dtype float32                 # L1 with custom dtype
 ```
 
 ### List All Supported Operations

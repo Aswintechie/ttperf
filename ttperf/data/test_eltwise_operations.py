@@ -73,8 +73,9 @@ def get_custom_config():
     custom_shape = os.environ.get('TTPERF_CUSTOM_SHAPE')
     custom_dtype = os.environ.get('TTPERF_CUSTOM_DTYPE')
     custom_layout = os.environ.get('TTPERF_CUSTOM_LAYOUT')
+    custom_memory_config = os.environ.get('TTPERF_CUSTOM_MEMORY_CONFIG')
     
-    if custom_shape or custom_dtype or custom_layout:
+    if custom_shape or custom_dtype or custom_layout or custom_memory_config:
         # Parse custom shape
         if custom_shape:
             try:
@@ -82,9 +83,9 @@ def get_custom_config():
                 shape_str = custom_shape.strip('()')
                 shape = tuple(int(x.strip()) for x in shape_str.split(','))
             except:
-                shape = (1, 1, 1024, 1024)
+                shape = (1, 1, 32, 32)
         else:
-            shape = (1, 1, 1024, 1024)
+            shape = (1, 1, 32, 32)
         
         # Parse custom dtype
         if custom_dtype:
@@ -110,23 +111,35 @@ def get_custom_config():
         else:
             layout = ttnn.TILE_LAYOUT
         
-        return shape, dtype, layout
+        # Parse custom memory config
+        if custom_memory_config:
+            if custom_memory_config.lower() == 'l1':
+                memory_config = ttnn.L1_MEMORY_CONFIG
+            elif custom_memory_config.lower() == 'dram':
+                memory_config = ttnn.DRAM_MEMORY_CONFIG
+            else:
+                memory_config = ttnn.DRAM_MEMORY_CONFIG
+        else:
+            memory_config = ttnn.DRAM_MEMORY_CONFIG
+        
+        return shape, dtype, layout, memory_config
     
-    return None, None, None
+    return None, None, None, None
 
 # Get custom configuration
-custom_shape, custom_dtype, custom_layout = get_custom_config()
+custom_shape, custom_dtype, custom_layout, custom_memory_config = get_custom_config()
 
 # Use custom config if available, otherwise use defaults
 DEFAULT_SHAPE = custom_shape if custom_shape else (1, 1, 32, 32)
 DEFAULT_DTYPE = custom_dtype if custom_dtype else ttnn.bfloat16
+DEFAULT_MEMORY_CONFIG = custom_memory_config if custom_memory_config else ttnn.DRAM_MEMORY_CONFIG
 DEFAULT_VALUES = "range"
 
 # Note: Individual tests will override DEFAULT_DTYPE with operation-specific dtypes
 # using get_operation_dtype() function
 
 # Print the actual configuration being used (for debugging)
-if custom_shape or custom_dtype or custom_layout:
+if custom_shape or custom_dtype or custom_layout or custom_memory_config:
     print(f"\n🔧 Using custom configuration:")
     print(f"   Shape: {DEFAULT_SHAPE}")
     # Convert dtype to string for better display
@@ -137,6 +150,11 @@ if custom_shape or custom_dtype or custom_layout:
         print(f"   Layout: {layout_name}")
     else:
         print(f"   Layout: tile")
+    if custom_memory_config:
+        memory_name = "L1" if custom_memory_config == ttnn.L1_MEMORY_CONFIG else "DRAM"
+        print(f"   Memory Config: {memory_name}")
+    else:
+        print(f"   Memory Config: DRAM")
 else:
     print(f"\n🔧 Using default configuration:")
     print(f"   Shape: {DEFAULT_SHAPE}")
@@ -144,6 +162,7 @@ else:
     dtype_name = "bfloat16" if DEFAULT_DTYPE == ttnn.bfloat16 else "float32" if DEFAULT_DTYPE == ttnn.float32 else "int32"
     print(f"   Dtype: {dtype_name}")
     print(f"   Layout: tile")
+    print(f"   Memory Config: DRAM")
     print(f"   Note: Individual operations may use different dtypes (e.g., bitwise operations use int32)")
 
 
@@ -152,11 +171,15 @@ else:
 # create_test_tensor(shape, dtype, device, values="range")  # Uses default range [-100, 100]
 # create_test_tensor(shape, dtype, device, values="range", min_val=-5.0, max_val=5.0)  # Custom range
 def create_test_tensor(shape: Tuple[int, ...], dtype: ttnn.DataType, 
-                      device, values: Optional[str] = "random", layout=None,
+                      device, values: Optional[str] = "random", layout=None, memory_config=None,
                       min_val: Optional[float] = None, max_val: Optional[float] = None) -> ttnn.Tensor:
     # Use custom layout if available, otherwise use TILE_LAYOUT
     if layout is None:
         layout = custom_layout if custom_layout else ttnn.TILE_LAYOUT
+    
+    # Use custom memory_config if available, otherwise use DEFAULT_MEMORY_CONFIG
+    if memory_config is None:
+        memory_config = custom_memory_config if custom_memory_config else DEFAULT_MEMORY_CONFIG
     """Create a test tensor with specified properties.
     
     Args:
@@ -170,6 +193,7 @@ def create_test_tensor(shape: Tuple[int, ...], dtype: ttnn.DataType,
             - "range": Uniform distribution between min_val and max_val (default: -100 to 100)
             - "random": Normal distribution (default)
         layout: TTNN layout (default: TILE_LAYOUT)
+        memory_config: TTNN memory configuration (default: DRAM_MEMORY_CONFIG)
         min_val: Minimum value for "range" distribution (default: -100)
         max_val: Maximum value for "range" distribution (default: 100)
     """
@@ -219,7 +243,8 @@ def create_test_tensor(shape: Tuple[int, ...], dtype: ttnn.DataType,
     return torch_tensor, ttnn.from_torch(
         torch_tensor, 
         layout=layout, 
-        device=device
+        device=device,
+        memory_config=memory_config
     )
 
 
@@ -1197,9 +1222,9 @@ class TestEltwiseOperations:
         
         # Create min and max tensors with proper ranges
         torch_min = torch_min_base * 0.5 - 1.0
-        ttnn_min = ttnn.from_torch(torch_min, layout=ttnn.TILE_LAYOUT, device=device)
+        ttnn_min = ttnn.from_torch(torch_min, layout=ttnn.TILE_LAYOUT, device=device, memory_config=DEFAULT_MEMORY_CONFIG)
         torch_max = torch_max_base * 0.5 + 1.0
-        ttnn_max = ttnn.from_torch(torch_max, layout=ttnn.TILE_LAYOUT, device=device)
+        ttnn_max = ttnn.from_torch(torch_max, layout=ttnn.TILE_LAYOUT, device=device, memory_config=DEFAULT_MEMORY_CONFIG)
         
         ttnn_result = ttnn.clip(ttnn_input, ttnn_min, ttnn_max)
         torch_result = torch.clip(torch_input, torch_min, torch_max)
@@ -1852,9 +1877,10 @@ class TestEltwiseOperations:
     def test_bitwise_left_shift(self, device):
         """Test bitwise left shift operation."""
         # Get configuration
-        shape = get_operation_shape('bitwise_left_shift')
+        config = get_operation_config('bitwise_left_shift')
+        shape = tuple(config['shape'])
         dtype = ttnn.int32  # Force int32 for bitwise operations
-        layout = get_operation_layout('bitwise_left_shift')
+        layout = ttnn.TILE_LAYOUT if config['layout'] == 'tile' else ttnn.ROW_MAJOR_LAYOUT
         
         # Create input tensors
         a = ttnn.tensor(shape, dtype=dtype, layout=layout, device=device)
@@ -1878,9 +1904,10 @@ class TestEltwiseOperations:
     def test_bitwise_right_shift(self, device):
         """Test bitwise right shift operation."""
         # Get configuration
-        shape = get_operation_shape('bitwise_right_shift')
+        config = get_operation_config('bitwise_right_shift')
+        shape = tuple(config['shape'])
         dtype = ttnn.int32  # Force int32 for bitwise operations
-        layout = get_operation_layout('bitwise_right_shift')
+        layout = ttnn.TILE_LAYOUT if config['layout'] == 'tile' else ttnn.ROW_MAJOR_LAYOUT
         
         # Create input tensors
         a = ttnn.tensor(shape, dtype=dtype, layout=layout, device=device)

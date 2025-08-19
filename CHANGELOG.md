@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.5] - 2025-01-14
+
+### Added
+- **Memory Configuration Support**: New command-line options for tensor memory configuration
+- `--memory-config CONFIG`: General option with choices `[dram, l1]`
+- `--dram`: Shortcut flag for DRAM memory (default)
+- `--l1`: Shortcut flag for L1 memory
+- Memory configuration extraction from CSV profiler output
+- Memory config display in test result summaries
+
+### Changed
+- **Default tensor shape reduced from `[1, 1, 1024, 1024]` to `[1, 1, 32, 32]` for better performance**
+- Enhanced `create_test_tensor()` function to accept memory_config parameter
+- Updated all `ttnn.from_torch()` calls to use memory_config parameter
+- Improved CSV extraction to read memory configuration from profiler output
+- Enhanced debug output to show memory configuration
+
+### Technical
+- Added `validate_memory_config()` function with alias support
+- Extended environment variable system with `TTPERF_CUSTOM_MEMORY_CONFIG`
+- Updated operation_configs.json to include memory_config field
+- Enhanced test file configuration parsing to handle memory settings
+- Improved result reporting to include memory configuration details
+
 ## [0.1.4] - 2025-01-14
 
 ### Changed

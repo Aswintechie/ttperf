@@ -212,7 +212,26 @@ def validate_layout(layout_str: str) -> str:
     sys.exit(1)
 
 
-def set_test_configuration(shape: tuple, dtype: str, layout: str, operation_name: str = None):
+def validate_memory_config(memory_config_str: str) -> str:
+    """Validate and return memory configuration string."""
+    # Map aliases to canonical names
+    memory_config_aliases = {
+        'dram': 'dram',
+        'l1': 'l1',
+        'dram_interleaved': 'dram',
+        'l1_memory': 'l1'
+    }
+    
+    memory_config_lower = memory_config_str.lower()
+    if memory_config_lower in memory_config_aliases:
+        return memory_config_aliases[memory_config_lower]
+    
+    valid_options = list(set(memory_config_aliases.keys()))
+    print(f"❌ Invalid memory config: {memory_config_str}. Valid options: {', '.join(sorted(valid_options))}")
+    sys.exit(1)
+
+
+def set_test_configuration(shape: tuple, dtype: str, layout: str, memory_config: str = None, operation_name: str = None):
     """Set environment variables for test configuration."""
     # For bitwise operations, always use int32 regardless of what's specified
     if operation_name and operation_name.startswith('bitwise_'):
@@ -221,10 +240,14 @@ def set_test_configuration(shape: tuple, dtype: str, layout: str, operation_name
     os.environ['TTPERF_CUSTOM_SHAPE'] = str(shape)
     os.environ['TTPERF_CUSTOM_DTYPE'] = dtype
     os.environ['TTPERF_CUSTOM_LAYOUT'] = layout
+    if memory_config:
+        os.environ['TTPERF_CUSTOM_MEMORY_CONFIG'] = memory_config
     print(f"🔧 Using custom configuration:")
     print(f"   Shape: {shape}")
     print(f"   Dtype: {dtype}")
     print(f"   Layout: {layout}")
+    if memory_config:
+        print(f"   Memory Config: {memory_config}")
 
 
 def print_help():
@@ -240,6 +263,8 @@ Examples:
   ttperf my_profile add                         # Custom profile name for operation: my_profile
   ttperf add --shape 1,1,32,32 --dtype bf16 --layout tile      # Custom configuration
   ttperf relu --dtype fp32 --layout rm                        # Using aliases
+  ttperf add --dram                                            # Use DRAM memory (default)
+  ttperf relu --l1                                             # Use L1 memory
 
 Options:
   --version, -v           Show version information
@@ -249,6 +274,9 @@ Options:
   --shape SHAPE           Tensor shape (e.g., 1,1,32,32)
   --dtype DTYPE           Data type (bfloat16/bf16, float32/fp32/f32, int32/i32)
   --layout LAYOUT         Memory layout (tile, row_major/rm)
+  --memory-config CONFIG  Memory configuration (dram, l1)
+  --dram                  Use DRAM memory (default)
+  --l1                    Use L1 memory
 
 Arguments:
   PROFILE_NAME            Optional name for the profiling session
@@ -327,7 +355,7 @@ def generate_profile_name(test_cmd: str) -> str:
 def parse_args(argv):
     # Handle version and help flags
     if "--version" in argv or "-v" in argv:
-        print("ttperf version 0.1.4")
+        print("ttperf version 0.1.5")
         sys.exit(0)
     
     if "--help" in argv or "-h" in argv:
@@ -344,6 +372,9 @@ def parse_args(argv):
     parser.add_argument('--shape', type=str, help='Tensor shape (e.g., 1,1,32,32)')
     parser.add_argument('--dtype', type=str, help='Data type (bfloat16/bf16, float32/fp32/f32, int32/i32)')
     parser.add_argument('--layout', type=str, help='Memory layout (tile, row_major/rm)')
+    parser.add_argument('--memory-config', type=str, choices=['dram', 'l1'], default='dram', help='Memory configuration (dram, l1)')
+    parser.add_argument('--dram', action='store_const', const='dram', dest='memory_config', help='Use DRAM memory (default)')
+    parser.add_argument('--l1', action='store_const', const='l1', dest='memory_config', help='Use L1 memory')
     
     # Parse known args to extract configuration options
     args, remaining = parser.parse_known_args(argv)
@@ -374,13 +405,14 @@ def parse_args(argv):
         sys.exit(1)
 
     # Process custom configuration
-    if args.shape or args.dtype or args.layout:
+    if args.shape or args.dtype or args.layout or args.memory_config:
         # Check if we're profiling an operation (not a test file)
         if test_cmd and "test_eltwise_operations.py" in test_cmd:
             # Parse configuration
-            shape = parse_shape(args.shape) if args.shape else (1, 1, 1024, 1024)
+            shape = parse_shape(args.shape) if args.shape else (1, 1, 32, 32)
             dtype = validate_dtype(args.dtype) if args.dtype else "bfloat16"
             layout = validate_layout(args.layout) if args.layout else "tile"
+            memory_config = validate_memory_config(args.memory_config) if args.memory_config else "dram"
             
             # For bitwise operations, always use int32 regardless of what's specified
             if operation_name and operation_name.startswith('bitwise_'):
@@ -390,13 +422,14 @@ def parse_args(argv):
             custom_config = {
                 'shape': shape,
                 'dtype': dtype,
-                'layout': layout
+                'layout': layout,
+                'memory_config': memory_config
             }
             
             # Set environment variables for the test
-            set_test_configuration(shape, dtype, layout, operation_name)
+            set_test_configuration(shape, dtype, layout, memory_config, operation_name)
         else:
-            print("⚠️  Custom configuration options (--shape, --dtype, --layout) only work with operation names, not test files.")
+            print("⚠️  Custom configuration options (--shape, --dtype, --layout, --memory-config) only work with operation names, not test files.")
 
     # Auto-generate profile name if not provided
     if not name:
@@ -453,6 +486,18 @@ def extract_config_from_csv(csv_path: str) -> dict:
             # Convert to lowercase for consistency  
             config['layout'] = output_layout.lower() if isinstance(output_layout, str) else 'tile'
             
+            # Extract memory configuration from memory columns
+            output_memory = row.get('OUTPUT_0_MEMORY', row.get('INPUT_0_MEMORY', 'DEV_1_DRAM_INTERLEAVED'))
+            if isinstance(output_memory, str):
+                if 'L1' in output_memory.upper():
+                    config['memory_config'] = 'l1'
+                elif 'DRAM' in output_memory.upper():
+                    config['memory_config'] = 'dram'
+                else:
+                    config['memory_config'] = 'dram'  # Default fallback
+            else:
+                config['memory_config'] = 'dram'  # Default fallback
+            
     except Exception as e:
         print(f"⚠️  Warning: Could not extract config from CSV: {e}")
         # Return empty config - will fall back to other methods
@@ -501,6 +546,10 @@ def extract_test_config_and_status(output: str, csv_path: str = None) -> dict:
         layout_match = re.search(r'🔧.*?Using.*?configuration.*?Layout:\s*(tile|row_major)', output, re.IGNORECASE)
         if layout_match:
             result['config']['layout'] = layout_match.group(1).lower()
+            
+        memory_config_match = re.search(r'🔧.*?Using.*?configuration.*?Memory Config:\s*(L1|DRAM|dram|l1)', output, re.IGNORECASE)
+        if memory_config_match:
+            result['config']['memory_config'] = memory_config_match.group(1).lower()
     
     # For bitwise operations, ensure int32 dtype if not already set from CSV
     if result['test_name'].startswith('bitwise_') and not result['config'].get('dtype'):
@@ -544,6 +593,8 @@ def print_test_summary(test_info: dict, csv_path: str, duration: float, custom_c
             config_str.append(f"dtype={custom_config['dtype']}")
         if 'layout' in custom_config:
             config_str.append(f"layout={custom_config['layout']}")
+        if 'memory_config' in custom_config:
+            config_str.append(f"memory_config={custom_config['memory_config']}")
         print(f"⚙️  Configuration: {', '.join(config_str)} (custom)")
     elif test_info['config']:
         config_str = []
@@ -553,6 +604,8 @@ def print_test_summary(test_info: dict, csv_path: str, duration: float, custom_c
             config_str.append(f"dtype={test_info['config']['dtype']}")
         if 'layout' in test_info['config']:
             config_str.append(f"layout={test_info['config']['layout']}")
+        if 'memory_config' in test_info['config']:
+            config_str.append(f"memory_config={test_info['config']['memory_config']}")
         print(f"⚙️  Configuration: {', '.join(config_str)}")
     else:
         # Try to show expected configuration based on operation name
@@ -565,6 +618,8 @@ def print_test_summary(test_info: dict, csv_path: str, duration: float, custom_c
                 config_str.append(f"dtype={expected_config['dtype']}")
             if 'layout' in expected_config:
                 config_str.append(f"layout={expected_config['layout']}")
+            if 'memory_config' in expected_config:
+                config_str.append(f"memory_config={expected_config['memory_config']}")
             print(f"⚙️  Configuration: {', '.join(config_str)} (expected)")
         else:
             print("⚙️  Configuration: Not detected")
